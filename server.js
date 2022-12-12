@@ -770,15 +770,7 @@ app.post('/pay', async (req, res) => {
 
     try {
         // Gets the price from the request body
-        let order_id;
-        const { tier, user_id, clientPrice } = req.body
-
-        // Get the last order id of that user id
-        const sql = 'SELECT order_id FROM ORDERS WHERE user_id = ? ORDER BY order_id DESC LIMIT 1';
-        cnx.query(sql, [user_id], (err, rows) => {
-            if (err) throw err;
-            order_id = rows[0].order_id;
-        })
+        const { tier, user_id, clientPrice, order_id } = req.body
 
         // If there isn't a price, return an error
         if (!clientPrice) {
@@ -823,7 +815,7 @@ app.post('/pay', async (req, res) => {
                 },
             ],
             mode: 'payment',
-            success_url: `http://sendittarragona.live/tracking/order_id=${order_id}&user_id=${user_id}`,
+            success_url: user_id ? `http://sendittarragona.live/tracking/order_id=${order_id}&user_id=${user_id}` : `http://sendittarragona.live/tracking/order_id=${order_id}&user_id=null`,
             cancel_url: 'http://sendittarragona.live/new',
         });
 
