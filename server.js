@@ -772,6 +772,7 @@ app.post('/pay', async (req, res) => {
         // Gets the price from the request body
         const { tier, user_id, clientPrice, order_id } = req.body
 
+        console.log(tier, user_id, clientPrice, order_id)
         // If there isn't a price, return an error
         if (!clientPrice) {
             return res.status(400).send({
