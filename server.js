@@ -770,7 +770,7 @@ app.post('/pay', async (req, res) => {
 
     try {
         // Gets the price from the request body
-        const { tier, user_id, clientPrice, order_id } = req.body
+        let { tier, user_id, clientPrice, order_id } = req.body
 
         console.log(tier, user_id, clientPrice, order_id)
         // If there isn't a price, return an error
@@ -800,7 +800,7 @@ app.post('/pay', async (req, res) => {
         });
 
         // Creates a new price with the product
-        const price = await stripe.prices.create({
+        const price_final = await stripe.prices.create({
             product: product.id,
             unit_amount: clientPrice * 100,
             currency: 'eur',
@@ -811,7 +811,7 @@ app.post('/pay', async (req, res) => {
             payment_method_types: ['card', 'sepa_debit'],
             line_items: [
                 {
-                    price: price.id,
+                    price: price_final.id,
                     quantity: 1,
                 },
             ],
