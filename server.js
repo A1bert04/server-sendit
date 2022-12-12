@@ -776,7 +776,7 @@ app.post('/pay', async (req, res) => {
         // If there isn't a price, return an error
         if (!clientPrice) {
             return res.status(400).send({
-                error: 'Price is required', success: false
+                error: 'Price is required', success: false, tier: tier, user_id: user_id, clientPrice: clientPrice, order_id: order_id
             });
         }
 
