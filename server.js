@@ -796,7 +796,7 @@ app.post('/pay', async (req, res) => {
         // Creates a new product with the price
         const product = await stripe.products.create({
             name: 'Envio estandar',
-            description: `El precio viene definido por el peso y la distancia, por lo que puede variar en función de la zona de destino. | El precio de este envío es de \n${clientPrice}€ | Tier: ${tier}`
+            description: `El precio viene definido por el peso y la distancia, por lo que puede variar en función de la zona de destino. | El precio de este envío es de \n${clientPrice}€ | Tier: ${tier} | Order: ${order_id}`
         });
 
         // Creates a new price with the product
