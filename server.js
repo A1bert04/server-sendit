@@ -773,6 +773,7 @@ app.post('/pay', async (req, res) => {
         let { tier, user_id, clientPrice, order_id } = req.body
 
         console.log(tier, user_id, clientPrice, order_id)
+        res.send({tier: tier, user_id: user_id, clientPrice: clientPrice, order_id: order_id})
         // If there isn't a price, return an error
         if (!clientPrice) {
             return res.status(400).send({
